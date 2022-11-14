@@ -1,9 +1,38 @@
 # Singly Linked List
 
 - method
-  - push
+  - [push](#push)
   - [pop](#pop)
 
+## push
+
+새로운 데이터를 가진 노드를 생성하고 Linked_List 마지막에 연결한 후 tail로 설정한다. 새로운 노드를 추가할 때 고려해야할 상황이 있다
+
+- LinkedList에 node가 없는 경우
+- LinkedList에 node가 있는 경우
+
+node가 없는 경우, `head` `tail` 모두가 새로운 노드를 가리키도록 한다.
+node가 있는 경우, `tail` 이 새로운 노드를 가리키도록 한다.
+
+```js
+push(val) {
+  const newNode = new Node(val);
+
+  // LinkedList에 node가 없는 경우
+  if (!this.head) {
+    this.head = newNode;
+    this.tail = newNode;
+  }
+  // LinkedList에 node가 1개 이상인 경우
+  else {
+    this.tail.next = newNode;
+    this.tail = newNode;
+  }
+  this.length++;
+
+  return this;
+}
+```
 
 ## pop
 
