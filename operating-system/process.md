@@ -19,8 +19,10 @@
   - stack section : activation record (function parameters, local variables, return address)
   - heap section : 동적으로 할당되는 변수들 (malloc in C)
 
-**in stack** : 함수가 호출되면 함수와 관련된 activation record가 스택에 push되고 종료되면 스택에서 pop된다. 이때, activation record는 function parameters, local variables, return address를 가지고 있는 자료구조이다.
-**in heap** : C에서 동적으로 할당, 해제하는 함수가 존재한다. malloc을 통해 생성한 데이터는 stack이 아닌 heap에 저장되고 free를 통해 heap에서 제거할 수 있다.
+###### in stack 
+함수가 호출되면 함수와 관련된 activation record가 스택에 push되고 종료되면 스택에서 pop된다. 이때, activation record는 function parameters, local variables, return address를 가지고 있는 자료구조이다.
+###### in heap 
+C에서 동적으로 할당, 해제하는 함수가 존재한다. malloc을 통해 생성한 데이터는 stack이 아닌 heap에 저장되고 free를 통해 heap에서 제거할 수 있다.
 
 > **NOTE** : stack, heap은 서로를 향해 커지는데 겹쳐질 걱정은 하지 않아도 된다. 메모리 영역은 충분히 클 뿐 아니라 운영체제가 알아서 CUT!
 
@@ -37,14 +39,14 @@
 - ready : CPU 할당을 기다리는 상태
 - terminated : 마지막 코드를 실행해서 종료된 상태
 
-**waiting**
+###### waiting
 프로세스가 `waiting` 상태를 가지는 대다수의 경우는 I/O 발생이다. I/O를 처리하는 동안 CPU할당을 받으면 안되고 I/O가 끝나기를 기다리는 상태라고 볼 수 있다. I/O가 끝났음을 알리는 것은 `interrupt`
 
 `new`, `wating`은 CPU 할당을 받지 않은 상태로 동일하지만 `new`는 CPU 할당을 기다리는 상태이고 `waiting`은 CPU 할당을 받으면 안되는 상태이다.
 
 > **NOTE**interrupt가 발생하면 interrupt 처리 코드가 있는 `interrupt handler` 로 넘어가 발생 interrupt와 관련된 코드를 실행시킨다
 
-**new**
+###### new
 개인 PC의 경우 프로세스가 생성되면 바로 CPU할당을 대기한다. (`new` -> `ready`) 하지만 그러면 안되는 상황도 존재한다. 
 
 실시간 시스템에서는 `new` 상태가 중요하다. 왜냐하면 새로운 프로세스가 CPU 할당 대상이 되고 할당 받는다면 기존의 프로세스들의 deadline을 지키지 못하는 경우가 발생하기 때문이다.
