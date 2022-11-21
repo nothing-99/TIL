@@ -58,3 +58,17 @@ C에서 동적으로 할당, 해제하는 함수가 존재한다. malloc을 통�
 - `running` -> `terminated` : 마지막 명령어가 실행되고 프로그램이 종료되는 시점
 - `running` -> `ready` : 정해진 CPU 할당 시간이 끝나는 시점
 - `running` -> `waiting` : (대체로)I/O 발생으로 CPU를 놓는 시점. 이때 interrupt가 발생하면 interrupt 처리 후 `running` 으로 바뀌는 것이 아니라 `ready` 로 바뀐다.
+
+## Process Control Block (PCB)
+
+운영체제에게 프로세스는 PCB이다. 즉, 운영체제의 입장에서 프로세스를 다룰 때, PCB를 다룬다고 보면 된다.
+
+**Process Control Block**은 프로세스를 실행하거나 재실행하기 위해 필요한 모든 데이터를 가지고 있는 (kernel)자료구조이다.
+
+- **Process state** : new, ready, running, waiting and so on
+- **Program counter** : 프로세스 실행할 때, 다음으로 실행할 명령어의 주소
+- **CPU registers** : CPU 레지스터, 일반 레지스터
+- **CPU-scheduling info** : 우선순위, 스케쥴링 큐에서의 포인터 등
+- **Memory-management info** : base and limit register, page table, segment table (운영체제의 메모리 시스템에 따라 달라진다)
+- **Accounting info** : CPU 사용시간, 실제 사용시간, 프로세스 넘버 등
+- **I/O status info** : 프로세스에 할당된 I/O 장치, 프로세스를 위해 열린 파일들도 포함한다.
