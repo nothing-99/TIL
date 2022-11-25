@@ -6,6 +6,11 @@
   - [pop](#pop)
   - [shift](#shift)
   - [unshift](#unshift)
+  - [get](#get)
+  - [set](#set)
+  - [insert](#insert)
+  - [remove](#remove)
+- [Time-Complex](#time-complex)
 
 ## Compare with SinglyLinkedList
 
@@ -194,3 +199,78 @@ get(index) {
 }
 ```
 [UP](#doubly-linked-list)
+
+### set
+`set(index, val)` : index 위치에 있는 노드의 데이터를 val로 바꾼다.
+- index위치의 노드는 `get(index)`를 사용해 쉽게 찾을 수 있다.
+```js
+set(index, val) {
+  const target = this.get(index);
+  if (target) {
+    target.val = val;
+    return true;
+  }
+  return false;
+}
+```
+[UP](#doubly-linked-list)
+
+### insert
+`insert(index, val)` : val을 가지는 새로운 노드를 생성해 index 위치에 끼워 넣는다.
+- **유효한 index가 아닌 경우** : 0보다 작거나 LinkedList의 길이보다 큰 경우 
+- **index가 0인 경우** : LinkedList의 시작 부분에 새로운 노드를 추가하는 것과 같기 때문에 `unshift(val)` 
+- **index가 전체 노드의 개수와 같은 경우** : LinkedList의 끝 부분에 새로운 노드를 추가하는 것과 같기 때문에 `push(val)`
+- **index가 0보다 크고 노드의 개수보다 작은 경우** : `get(index-1)`을 통해 새로운 노드가 위치할 부분의 앞 노드를 찾아서 4개의 포인터(연결)를 수정한다
+  - newNode.prev = prev
+  - newNode.next = prev.next
+  - prev.next.prev = newNode
+  - prev.next = newNode
+
+> `prev.next.prev` `prev.next` 의 순서를 지켜야할 듯 하다. 후자를 먼저 실행할 경우 prev.next.prev는 newNode.prev와 같아져 **newNode.prev = newNode**를 실행하게 된다.
+
+```js
+insert(index, val) {
+  if (index < 0 || index > this.length) return false;
+  if (index === 0) return !!this.unshift(val);
+  if (index === this.length) return !!this.push(val);
+
+  const newNode = new Node(val);
+  const prevNode = this.get(index-1);
+
+  newNode.prev = prevNode, newNode.next = prevNode.next;
+  prevNode.next.prev = newNode, prevNode.next = newNode;
+  this.length++;
+  return true;
+}
+```
+[UP](#doubly-linked-list)
+
+### remove
+`remove(index)` : index 위치의 노드를 찾아 추출한다.
+- **유효한 index가 아닌 경우** : `0 < index <= this.length`
+- **index가 0인 경우** : LinkedList의 head에 있는 node를 추출하는 것이기 때문에 `shift()`
+- **index가 this.length-1인 경우** : LinkedList의 tail에 있는 node를 추출하는 것이기 때문에 `pop()`
+- **index가 0과 this.length-1 사이인 경우** : `get(index)`를 통해 추출 대상 노드를 찾아 대상 노드의 이전 노드와 다음 노드를 서로 연결시켜주고 대상 노드의 `prev` `next` 를 모두 **null**로 초기화시킨다.
+```js
+remove(index) {
+  if (index < 0 || index >= this.length) return null;
+  if (index === 0) return shift();
+  if (index === this.length-1) return pop();
+
+  const target = this.get(index);
+  target.prev.next = target.next, target.next.prev = target.prev;
+  target.prev = null, target.next = null;
+  this.length--;
+  return target;
+}
+```
+[UP](#doubly-linked-list)
+
+## time complex
+- `insertion` **O(1)**
+- `removal` **O(1)** : Doubly Linked List는 `prev` 포인터의 존재로 이전 노드에 접근 가능하다. `this.tail.prev` 를 통해 새로운 tail node를 찾을 수 있기 때문에 O(1) 의 시간복잡도를 가진다.
+- `search` `access` **O(N)** : Singly Linked List 와 비교했을 때 시간복잡도는 같지만 자세히 들어가면 차이가 존재한다. Doubly Linked List 는 index 를 보고 `head` `tail` 중 검색 시작 지점을 달리 하기 때문에 O(N/2) 이다. 
+
+Doubly Linked List 와 Singly Linked List 의 차이는 이전 노드를 가리키는 **`prev` 의 존재여부**이다.
+
+Doubly Linked List는 `prev`의 존재로 **메모리를 더 소요**하지만 **메서드 성능면에서 이점**을 본다 
