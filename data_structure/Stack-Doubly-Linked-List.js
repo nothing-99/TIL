@@ -37,7 +37,7 @@ class Stack {
       target.prev = null;
     }
     this.size--;
-    return target;
+    return target.val;
   }
 }
 
