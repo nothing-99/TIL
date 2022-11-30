@@ -44,4 +44,8 @@ console.log(bm);
 // Nft {name: 'mutant monkey', chain: 'stacks', supply: 2500}
 ```
 
+## 참조
+- https://www.patterns.dev/posts/classic-design-patterns/#singletonpatternjavascript
+- https://www.devh.kr/2021/Design-Patterns-In-JavaScript/
+
 [README](./README.md)
