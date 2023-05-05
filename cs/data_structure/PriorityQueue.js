@@ -87,7 +87,7 @@ class PriorityQueue {
         // 왼쪽 요소와 오른쪽 요소의 우선순위 비교
         if (swap && (right.priority < left.prioirty || (right.prioirty === left.prioirty && right.insertedTime < left.insertedTime))) swap = rightIdx;
         // 기준 요소와 오른쪽 요소의 우선순위 비교
-        if (!swap && (right.prioirty < node.prioirty || (right.priority === node.prioirty && right.insertedTime < node.insertedTime))) swap = rightidx;
+        if (!swap && (right.prioirty < node.prioirty || (right.priority === node.prioirty && right.insertedTime < node.insertedTime))) swap = rightIdx;
       }
       // 현재 위치가 올바른 위치
       if (!swap) break;
