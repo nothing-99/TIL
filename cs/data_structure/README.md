@@ -6,3 +6,11 @@
 - 그래프
   - [Graph Code](./Graph.js)
   - [Graph Study](https://rareapepe.tistory.com/14)
+- 이진힙
+  - [BinaryHeap Study](https://rareapepe.tistory.com/10)
+  - [MaxBinaryHeap Code](./MaxBinaryHeap.js)
+  - [MaxBinaryHeap Study](https://rareapepe.tistory.com/11)
+  - [MinBinaryHeap Code](./MinBinaryHeap.js)
+  - [MinBinaryHeap Study](https://rareapepe.tistory.com/9)
+  - [PriorityQueue Code](./PriorityQueue.js)
+  - [PriorityQueue Study](https://rareapepe.tistory.com/12)
