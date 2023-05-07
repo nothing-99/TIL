@@ -8,6 +8,11 @@
   - [Queue Code](./Queue.js)
   - [Queue Study](https://rareapepe.tistory.com/16)
 
+- 트리
+
+  - [BinarySearchTree Code](./BinarySearchTree.js)
+  - [BinarySearchTree Study](https://rareapepe.tistory.com/17)
+
 - 이진힙
 
   - [BinaryHeap Study](https://rareapepe.tistory.com/10)
